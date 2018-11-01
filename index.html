@@ -2,11 +2,12 @@
 
 <style>
   #plagiarizer {
+    font-family: Arial;
+    color: #2F3D45;
     width: 1200px;
   }
   #inputText {
     background-color: #f5f5f5;
-    font-family: Arial;
     border-radius: 0.5vw;
     border-style:solid;
     font-size: 14px;
@@ -18,9 +19,12 @@
   }
   #outputText {
     word-break: break-all;
-    font-family: Arial;
     text-align: left;
     padding: 14px;
+  }
+  #uniquenessText {
+    font-family: Arial Black;
+    font-size: 56px;
   }
 </style>
 
@@ -208,15 +212,35 @@
   const rewriteParagraph = (paragraph) => rewrittenSentences = paragraph.split('.').map(rewriteSentence).join('.');
 
   const rewriteText = (inputText) => inputText.split('\n').map(rewriteParagraph).join('<br>');
+
+  const getUniqueness = (inputText, outputText) => {
+    const equalWords = inputText
+      .toLowerCase()
+      .replace(/\W/g, ' ')
+      .split(' ')
+      .filter(element => element !== '')
+      .map(word => outputText.toLowerCase()
+        .replace(/\W/g, ' ')
+        .includes(word) ? 1 : 0)
+        .filter(element => element !== 0).length;
+
+    const totalWords = inputText
+      .toLowerCase()
+      .replace(/\W/g, ' ')
+      .split(' ')
+      .filter(element => element !== '').length;
+
+    return totalWords === 0 ? '&nbsp' : `${Math.round((1-equalWords/totalWords)*100)}% unique`;
+  }
 </script>
 
 <body>
   <center>
     <div id='plagiarizer' >
       <form>
-        <textarea id='inputText' name='input' cols=100 rows=10 oninput="document.getElementById('outputText').innerHTML=rewriteText(value);"></textarea>
+        <textarea id='inputText' name='input' cols=100 rows=10 oninput="document.getElementById('outputText').innerHTML=rewriteText(value);document.getElementById('uniquenessScore').innerHTML=getUniqueness(value, document.getElementById('outputText').innerHTML)"></textarea>
       </form>
-      <br>
+      <div id='uniquenessText'><span id='uniquenessScore'></span>&nbsp</div>
       <div id='outputText'></div>
     </div>
   </center>
