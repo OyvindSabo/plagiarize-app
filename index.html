@@ -2,7 +2,7 @@
 
 <style>
   #plagiarizer {
-    width: 80em;
+    width: 1200px;
   }
   #inputText {
     background-color: #f5f5f5;
@@ -25,128 +25,158 @@
 <script>
   // Synonyms stored in non-redundant arrays
   const synonymArrays = [
-    ["abandon", "abdicate"],
-    ["abase", "debase", "degrade"],
-    ["abdomen", "belly", "tummy"],
-    ["abundant", "copious"],
-    ["adept", "deft", "skillful"],
-    ["agony", "pain"],
-    ["ait", "eyot", "holm", "islet"],
-    ["allegiance", "fidelity", "loyalty"],
-    ["amicable", "friendly"],
-    ["anger", "wrath", "rage"],
-    ["annoy", "irk", "irritate"],
-    ["ask", "inquire"],
-    ["assist", "bestead"],
-    ["aware of", "cognizant of"],
 
-    ["backpack", "knapsack", "packsack"],
-    ["ban", "forbid", "prohibit"],
-    ["before", "ere"],
-    ["the beginning", "the start"],
-    ["to begin", "to start"],
-    ["bliss", "delight", "pleasure", "satisfaction"],
-    ["bloom", "blossom"],
-    ["blunder", "mistake"],
-    ["boar", "hog"],
-    ["boil", "seethe"],
-    ["bring up", "raise"],
-    ["brotherly", "fraternal"],
-    ["business", "company", "enterprise"],
-    ["buy", "purchase"],
+    // A
+    ['abandon', 'abdicate'],
+    ['abase', 'debase', 'degrade'],
+    ['abdomen', 'belly', 'tummy'],
+    ['abundant', 'copious'],
+    ['adept', 'deft', 'skillful'],
+    ['agony', 'pain'],
+    ['ait', 'eyot', 'holm', 'islet'],
+    ['allegiance', 'fidelity', 'loyalty'],
+    ['amicable', 'friendly'],
+    ['anger', 'wrath', 'rage'],
+    ['annoy', 'irk', 'irritate'],
+    ['ask', 'inquire'],
+    ['assessment', 'evaluation'],
+    ['assist', 'bestead'],
+    ['aware of', 'cognizant of'],
 
-    ["canine", "dog"],
-    ["carambola", "starfruit"],
-    ["chic", "dashing", "fashionable", "trendy"],
-    ["color", "hue"],
-    ["comprehend", "grasp", "understand"],
-    ["consume", "devour"],
-    ["corpse", "dead body"],
-    ["couch", "sofa"],
-    ["crafty", "cunning"],
+    // B
+    ['backpack', 'knapsack', 'packsack'],
+    ['ban', 'forbid', 'prohibit'],
+    ['before', 'ere'],
+    ['the beginning', 'the start'],
+    ['to begin', 'to start'],
+    ['bliss', 'delight', 'pleasure', 'satisfaction'],
+    ['bloom', 'blossom'],
+    ['blunder', 'mistake'],
+    ['boar', 'hog'],
+    ['boil', 'seethe'],
+    ['bring up', 'raise'],
+    ['brotherly', 'fraternal'],
+    ['business', 'company', 'enterprise'],
+    ['buy', 'purchase'],
 
-    ["deadly", "mortal"],
-    ["decay", "putrefy", "rot"],
-    ["deluge", "flood"],
-    ["detest", "hate", "loathe", "scorn"],
-    ["discourse", "prate", "prattle", "talk"],
+    // C
+    ['canine', 'dog'],
+    ['carambola', 'starfruit'],
+    ['chic', 'dashing', 'fashionable', 'trendy'],
+    ['color', 'hue'],
+    ['companion', 'partner'],
+    ['compensate', 'recompense'],
+    ['compensated', 'recompensed'],
+    ['comprehend', 'grasp', 'understand'],
+    ['consume', 'devour'],
+    ['corpse', 'dead body'],
+    ['couch', 'sofa'],
+    ['crafty', 'cunning'],
 
-    ["dog", "hound"],
-    ["dove", "pigeon"],
-    ["drink", "imbibe"],
+    // D
+    ['deadly', 'mortal'],
+    ['decay', 'putrefy', 'rot'],
+    ['deluge', 'flood'],
+    ['detest', 'hate', 'loathe', 'scorn'],
+    ['discourse', 'prate', 'prattle', 'talk'],
 
-    ["educate", "teach"],
-    ["elevating", "raising", "uplifting"],
-    ["employment", "job"],
-    ["ettle", "intend"],
-    ["expectorate", "spit"],
+    // D
+    ['dog', 'hound'],
+    ['dove', 'pigeon'],
+    ['drink', 'imbibe'],
 
-    ["fast", "rapid"],
-    ["fatherly", "paternal"],
-    ["fill up", "replenish"],
-    ["fine", "good"],
-    ["firstly", "mainly", "primarily"],
-    ["flood", "inundate"],
-    ["foretell", "predict"],
-    ["former", "previous", "whilom"],
-    ["freedom", "liberty"],
-    ["furnace", "hearth", "kiln"],
+    // E
+    ['educate', 'teach'],
+    ['elevating', 'raising', 'uplifting'],
+    ['employment', 'job'],
+    ['essentially', 'practically'],
+    ['eternal', 'permanent'],
+    ['ettle', 'intend'],
+    ['expectorate', 'spit'],
 
-    ["go on", "proceed"],
-    ["green", "verdant"],
-    ["grief", "sorrow", "woe"],
-    ["grim", "stern"],
-    ["ground", "soil"],
-    ["groundhog", "woodchuck"],
+    // F
+    ['fast', 'rapid'],
+    ['fatherly', 'paternal'],
+    ['fill up', 'replenish'],
+    ['film', 'movie'],
+    ['fine', 'good'],
+    ['firstly', 'mainly', 'primarily'],
+    ['flood', 'inundate'],
+    ['foretell', 'predict'],
+    ['former', 'previous', 'whilom'],
+    ['freedom', 'liberty'],
+    ['furnace', 'hearth', 'kiln'],
 
-    ["hallowed", "holy", "sacred"],
-    ["hardship", "ordeal"],
-    ["he is", "he's"],
-    ["height", "loftiness"],
-    ["hello", "hey", "hi"],
-    ["hen", "pullet"],
-    ["hibernate", "lie dormant", "lie torpid"],
-    ["hibernating", "sleeping", "slumbering"],
-    ["hill", "mound"],
-    ["holiday", "vacation"],
-    ["huge", "large"],
+    // G
+    ['go on', 'proceed'],
+    ['green', 'verdant'],
+    ['grief', 'sorrow', 'woe'],
+    ['grim', 'stern'],
+    ['ground', 'soil'],
+    ['groundhog', 'woodchuck'],
 
-    ["it is", "it's"],
-    ["I am", "I'm"],
-    ["infant", "newborn"],
+    // H
+    ['hallowed', 'holy', 'sacred'],
+    ['hardship', 'ordeal'],
+    ['he is', 'he\'s'],
+    ['height', 'loftiness'],
+    ['hello', 'hey', 'hi'],
+    ['hen', 'pullet'],
+    ['hibernate', 'lie dormant', 'lie torpid'],
+    ['hibernating', 'sleeping', 'slumbering'],
+    ['hill', 'mound'],
+    ['holiday', 'vacation'],
+    ['huge', 'large'],
 
-    ["journey", "voyage"],
+    // I
+    ['it is', 'it\'s'],
+    ['I am', 'I\'m'],
+    ['infant', 'newborn'],
 
-    ["landscape", "terrain"],
-    ["late", "tardy"],
-    ["lean", "recline"],
-    ["lear", "lere"],
-    ["legit", "legitimate"],
-    ["look for", "seek"],
+    // J
+    ['journey', 'voyage'],
 
-    ["many", "multiple", "numerous"],
-    ["maternal", "motherly"],
-    ["maybe", "perhaps"],
-    ["menace", "threat"],
-    ["midday", "noon"],
-    ["miscellaneous", "various"],
+    // L
+    ['landscape', 'terrain'],
+    ['late', 'tardy'],
+    ['lately', 'newly', 'recently'],
+    ['lean', 'recline'],
+    ['lear', 'lere'],
+    ['legit', 'legitimate'],
+    ['look for', 'seek'],
 
-    ["near", "nigh"],
-    ["nightly", "nocturnal"],
+    // M
+    ['many', 'multiple', 'numerous'],
+    ['maternal', 'motherly'],
+    ['maybe', 'perhaps'],
+    ['menace', 'threat'],
+    ['midday', 'noon'],
+    ['miscellaneous', 'various'],
 
-    ["pensive", "thoughtful"],
-    ["pig", "swine"],
+    // N
+    ['near', 'nigh'],
+    ['nightly', 'nocturnal'],
 
-    ["seeing", "sight", "vision"],
-    ["selfdom", "selfhood"],
-    ["sell", "vend"],
-    ["serpent", "snake"],
-    ["she is", "she's"],
-    ["sheep", "lamb"],
-    ["small", "tiny", "wee"],
+    // O
+    ['other half', 'spouse'],
 
-    ["yolo", "you only live once"],
-    ["you are", "you're"]
+    // P
+    ['pensive', 'thoughtful'],
+    ['pig', 'swine'],
+    ['publicize', 'publish'],
+
+    // S
+    ['seeing', 'sight', 'vision'],
+    ['selfdom', 'selfhood'],
+    ['sell', 'vend'],
+    ['serpent', 'snake'],
+    ['she is', 'she\'s'],
+    ['sheep', 'lamb'],
+    ['small', 'tiny', 'wee'],
+
+    // Y
+    ['yolo', 'you only live once'],
+    ['you are', 'you\'re'],
   ];
 
   // Create a dictionary from non-redundant arrays
@@ -184,7 +214,12 @@
   <center>
     <div id='plagiarizer' >
       <form>
-        <textarea id="inputText" name="input" rows=10 cols=100 oninput="document.getElementById('outputText').innerHTML=rewriteText(value)"></textarea>
+        <textarea id="inputText"
+                  name="input"
+                  cols=100
+                  rows=10
+                  oninput="document.getElementById('outputText').innerHTML=rewriteText(value)">            
+        </textarea>
       </form>
       <br>
       <div id='outputText'></div>
