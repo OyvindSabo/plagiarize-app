@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<style>
+  #plagiarizer {
+    width: 80em;
+  }
+  #inputText {
+    background-color: #f5f5f5;
+    font-family: Arial;
+    border-radius: 0.5vw;
+    border-style:solid;
+    font-size: 14px;
+    color: #2F3D45;
+    outline: none;
+    padding: 1em;
+    border:none;
+    width: 100%;
+  }
+  #outputText {
+    text-align: left;
+    font-family: Arial;
+  }
+</style>
+
+<script>
+  // Synonyms stored in non-redundant arrays
+  const synonymArrays = [
+    ["abandon", "abdicate"],
+    ["abase", "debase", "degrade"],
+    ["abdomen", "belly", "tummy"],
+    ["abundant", "copious"],
+    ["adept", "deft", "skillful"],
+    ["agony", "pain"],
+    ["ait", "eyot", "holm", "islet"],
+    ["allegiance", "fidelity", "loyalty"],
+    ["amicable", "friendly"],
+    ["anger", "wrath", "rage"],
+    ["annoy", "irk", "irritate"],
+    ["ask", "inquire"],
+    ["assist", "bestead"],
+    ["aware of", "cognizant of"],
+
+    ["backpack", "knapsack", "packsack"],
+    ["ban", "forbid", "prohibit"],
+    ["before", "ere"],
+    ["the beginning", "the start"],
+    ["to begin", "to start"],
+    ["bliss", "delight", "pleasure", "satisfaction"],
+    ["bloom", "blossom"],
+    ["blunder", "mistake"],
+    ["boar", "hog"],
+    ["boil", "seethe"],
+    ["bring up", "raise"],
+    ["brotherly", "fraternal"],
+    ["business", "company", "enterprise"],
+    ["buy", "purchase"],
+
+    ["canine", "dog"],
+    ["carambola", "starfruit"],
+    ["chic", "dashing", "fashionable", "trendy"],
+    ["color", "hue"],
+    ["comprehend", "grasp", "understand"],
+    ["consume", "devour"],
+    ["corpse", "dead body"],
+    ["couch", "sofa"],
+    ["crafty", "cunning"],
+
+    ["deadly", "mortal"],
+    ["decay", "putrefy", "rot"],
+    ["deluge", "flood"],
+    ["detest", "hate", "loathe", "scorn"],
+    ["discourse", "prate", "prattle", "talk"],
+
+    ["dog", "hound"],
+    ["dove", "pigeon"],
+    ["drink", "imbibe"],
+
+    ["educate", "teach"],
+    ["elevating", "raising", "uplifting"],
+    ["employment", "job"],
+    ["ettle", "intend"],
+    ["expectorate", "spit"],
+
+    ["fast", "rapid"],
+    ["fatherly", "paternal"],
+    ["fill up", "replenish"],
+    ["fine", "good"],
+    ["firstly", "mainly", "primarily"],
+    ["flood", "inundate"],
+    ["foretell", "predict"],
+    ["former", "previous", "whilom"],
+    ["freedom", "liberty"],
+    ["furnace", "hearth", "kiln"],
+
+    ["go on", "proceed"],
+    ["green", "verdant"],
+    ["grief", "sorrow", "woe"],
+    ["grim", "stern"],
+    ["ground", "soil"],
+    ["groundhog", "woodchuck"],
+
+    ["hallowed", "holy", "sacred"],
+    ["hardship", "ordeal"],
+    ["he is", "he's"],
+    ["height", "loftiness"],
+    ["hello", "hey", "hi"],
+    ["hen", "pullet"],
+    ["hibernate", "lie dormant", "lie torpid"],
+    ["hibernating", "sleeping", "slumbering"],
+    ["hill", "mound"],
+    ["holiday", "vacation"],
+    ["huge", "large"],
+
+    ["it is", "it's"],
+    ["I am", "I'm"],
+    ["infant", "newborn"],
+
+    ["journey", "voyage"],
+
+    ["landscape", "terrain"],
+    ["late", "tardy"],
+    ["lean", "recline"],
+    ["lear", "lere"],
+    ["legit", "legitimate"],
+    ["look for", "seek"],
+
+    ["many", "multiple", "numerous"],
+    ["maternal", "motherly"],
+    ["maybe", "perhaps"],
+    ["menace", "threat"],
+    ["midday", "noon"],
+    ["miscellaneous", "various"],
+
+    ["near", "nigh"],
+    ["nightly", "nocturnal"],
+
+    ["pensive", "thoughtful"],
+    ["pig", "swine"],
+
+    ["seeing", "sight", "vision"],
+    ["selfdom", "selfhood"],
+    ["sell", "vend"],
+    ["serpent", "snake"],
+    ["she is", "she's"],
+    ["sheep", "lamb"],
+    ["small", "tiny", "wee"],
+
+    ["yolo", "you only live once"],
+    ["you are", "you're"]
+  ];
+
+  // Create a dictionary from non-redundant arrays
+  const createDictionary = (arrays) => {
+    let dictionary = {};
+    arrays.forEach(array => {
+      array.forEach(word => dictionary[word] = array.filter(element => element !== word));
+    })
+    return dictionary;
+  }
+
+  // Declare a synonym dictionary from non-redundant synonym arrays
+  const synonymDictionary = createDictionary(synonymArrays);
+
+  const getSynonym = (word) => {
+    const cleanedWord = word.toLowerCase().replace(/\W/g, '');
+    const synonym = synonymDictionary[cleanedWord] && cleanedWord[0] === word.toLowerCase()[0]
+      ? synonymDictionary[cleanedWord][Math.floor(Math.random()*synonymDictionary[cleanedWord].length)] + word.slice(cleanedWord.length)
+      : word;
+    return word === word.toLowerCase()
+      ? synonym
+      : word === word.toUpperCase()
+      ? synonym.toUpperCase()
+      : synonym.substr(0, 1).toUpperCase() + synonym.slice(1);
+  }
+
+  const rewriteSentence = (sentence) => rewrittenWords = sentence.split(' ').map(getSynonym).join(' ');
+
+  const rewriteParagraph = (paragraph) => rewrittenSentences = paragraph.split('.').map(rewriteSentence).join('.');
+
+  const rewriteText = (inputText) => inputText.split('\n').map(rewriteParagraph).join('<br>');
+</script>
+
+<body>
+  <center>
+    <div id='plagiarizer' >
+      <form>
+        <textarea id="inputText" name="input" rows=10 cols=100 oninput="document.getElementById('outputText').innerHTML=rewriteText(value)"></textarea>
+      </form>
+      <br>
+      <div id='outputText'></div>
+    </div>
+  </center>
+</body>
