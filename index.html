@@ -49,6 +49,7 @@
     ['before', 'ere'],
     ['the beginning', 'the start'],
     ['to begin', 'to start'],
+    ['better half', 'other half', 'spouse'],
     ['bliss', 'delight', 'pleasure', 'satisfaction'],
     ['bloom', 'blossom'],
     ['blunder', 'mistake'],
@@ -157,9 +158,6 @@
     ['near', 'nigh'],
     ['nightly', 'nocturnal'],
 
-    // O
-    ['other half', 'spouse'],
-
     // P
     ['pensive', 'thoughtful'],
     ['pig', 'swine'],
@@ -179,7 +177,7 @@
     ['you are', 'you\'re'],
   ];
 
-  // Create a dictionary from non-redundant arrays
+  // Create dictionary from non-redundant arrays
   const createDictionary = (arrays) => {
     let dictionary = {};
     arrays.forEach(array => {
@@ -188,7 +186,7 @@
     return dictionary;
   }
 
-  // Declare a synonym dictionary from non-redundant synonym arrays
+  // Create synonym dictionary from non-redundant synonym arrays
   const synonymDictionary = createDictionary(synonymArrays);
 
   const getSynonym = (word) => {
