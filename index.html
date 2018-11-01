@@ -17,6 +17,7 @@
     width: 100%;
   }
   #outputText {
+    word-break: break-all;
     font-family: Arial;
     text-align: left;
     padding: 14px;
@@ -217,7 +218,7 @@
                   name="input"
                   cols=100
                   rows=10
-                  oninput="document.getElementById('outputText').innerHTML=rewriteText(value)">            
+                  oninput="document.getElementById('outputText').innerHTML=rewriteText(value);">            
         </textarea>
       </form>
       <br>
